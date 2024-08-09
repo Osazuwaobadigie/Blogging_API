@@ -4,12 +4,17 @@ import dotenv from "dotenv";
 import authRoute from "./routes/auth.route.js";
 import userRoute from "./routes/users.route.js";
 import blogRoute from "./routes/blogs.route.js";
+import redis from "redis"
 
 dotenv.config();
 
 const app = express();
 const MONGO_URL = process.env.MONGO_URL;
 const PORT = process.env.PORT;
+const client = redis.createClient()
+
+console.log('Connected to Redis:', client.connected);
+
 app.use(express.json());
 
 
@@ -29,8 +34,10 @@ app.all("*", (req, res) => {
 });
 
 
+
 mongoose.connect(MONGO_URL).then(() => {
     console.log("Connected to DB");
+   
     app.listen(PORT, () => {
         console.log(`server is running on port ${PORT}`);
     });

@@ -1,6 +1,6 @@
 import User from "../models/users.model.js";
 import blog from "../models/blogs.model.js";
-
+import { Types, isValidObjectId } from "mongoose";
 
 export const getAll = async () => {
   return blog.find().populate("user");
@@ -17,6 +17,10 @@ export const create = async (userId) => {
   
   return blog.create({ user: userId });
 };
+
+export const getUserBlog = async () => {
+  return blog.findOne(userId, blogId)
+}
 
 export const getOne = async (blogId) => {
   return blog.findOne({ _id: blogId });
