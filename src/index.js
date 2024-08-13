@@ -10,7 +10,7 @@ dotenv.config();
 
 const app = express();
 const MONGO_URL = process.env.MONGO_URL;
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8000
 const client = redis.createClient()
 
 console.log('Connected to Redis:', client.connected);
